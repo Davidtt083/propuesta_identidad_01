@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carta Descriptiva - Programa Formativo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Variables de color actualizadas */
+        :root {
+            --primary-color: #008D91; /* Azul/Turquesa oscuro de tu logo */
+            --secondary-color: #E0F2F7; /* Un azul claro suave para el fondo */
+            --accent-color: #FFC107; /* Un amarillo brillante para el contraste, o podríamos usar un turquesa más claro */
+            --text-color: #343A40; /* Gris oscuro para texto general (del logo de RH) */
+            --light-text-color: #6C757D; /* Gris más claro para hints */
+            --border-color: #B0D8DD; /* Borde suave, relacionado con el azul */
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --placeholder-color: #888;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .header {
+            width: 100%;
+            height: 120px;
+            background-color: #fff;
+            box-shadow: 0 4px 10px var(--shadow-color);
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .header-image {
+             width: 100%;
+             height: 100%;
+             object-fit: cover;
+             object-position: center;
+        }
+
+
+        .container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px var(--shadow-color);
+            max-width: 900px;
+            width: 100%;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            font-weight: 600;
+            font-size: 2.2em;
+            position: relative;
+        }
+
+        h1::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-color);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+            padding: 25px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background-color: #fdfdfd;
+        }
+
+        .form-section h2 {
+            color: var(--primary-color);
+            font-size: 1.6em;
+            margin-top: 0;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 1.1em;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea,
+        select {
+            width: calc(100% - 22px);
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 1em;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        textarea:focus,
+        select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(0, 141, 145, 0.2);
+            outline: none;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .checkbox-group, .radio-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 10px;
+        }
+
+        .checkbox-group label, .radio-group label {
+            display: flex;
+            align-items: center;
+            font-weight: 400;
+            color: var(--text-color);
+            cursor: pointer;
+            margin-bottom: 0;
+        }
+
+        input[type="checkbox"],
+        input[type="radio"] {
+            margin-right: 8px;
+            transform: scale(1.2);
+            accent-color: var(--primary-color);
+        }
+
+        .hint {
+            font-size: 0.9em;
+            color: var(--light-text-color);
+            margin-top: 5px;
+            display: block;
+        }
+
+        .button-group {
+            text-align: center;
+            margin-top: 40px;
+            display: flex; /* Para alinear los botones */
+            justify-content: center;
+            flex-wrap: wrap; /* Para que los botones se envuelvan en pantallas pequeñas */
+            gap: 15px; /* Espacio entre botones */
+        }
+
+        .submit-btn, .reset-btn, .pdf-btn { /* Clase para el nuevo botón */
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            font-weight: 600;
+        }
+
+        .submit-btn:hover, .pdf-btn:hover {
+            background-color: #007A7C;
+            transform: translateY(-2px);
+        }
+
+        .reset-btn {
+            background-color: var(--light-text-color);
+        }
+
+        .reset-btn:hover {
+            background-color: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        .pdf-btn { /* Estilos específicos para el botón PDF */
+            background-color: #DC3545; /* Un rojo para el PDF, o puedes elegir otro color */
+        }
+        .pdf-btn:hover {
+            background-color: #C82333;
+        }
+
+        .table-section {
+            margin-top: 30px;
+            overflow-x: auto;
+        }
+
+        .table-section h2 {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 10px var(--shadow-color);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.95em;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8f8f8;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .table-controls {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 15px;
+        }
+
+        .add-row-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background-color 0.3s ease;
+        }
+
+        .add-row-btn:hover {
+            background-color: #45a049;
+        }
+
+        .delete-row-btn {
+            background-color: #dc3545;
+            color: white;
+            padding: 6px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85em;
+            transition: background-color 0.3s ease;
+        }
+
+        .delete-row-btn:hover {
+            background-color: #c82333;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin-left: 10px;
+                margin-right: 10px;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            .form-section h2 {
+                font-size: 1.4em;
+            }
+            .checkbox-group, .radio-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .submit-btn, .reset-btn, .pdf-btn {
+                width: 100%;
+                margin: 10px 0;
+            }
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+            th {
+                display: none;
+            }
+            tr {
+                margin-bottom: 15px;
+                border: 1px solid var(--border-color);
+                border-radius: 8px;
+            }
+            td {
+                border: none;
+                position: relative;
+                padding-left: 50%;
+                text-align: right;
+            }
+            td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 6px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+                text-align: left;
+                font-weight: 600;
+                color: var(--primary-color);
+            }
+            .header {
+                height: 80px;
+            }
+        }
+    </style>
+    <!-- Incluir jsPDF y html2canvas desde CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+    <div class="header">
+        <img src="assets\header.png" alt="Recursos Humanos PROGREDI MH" class="header-image">
+    </div>
+
+    <div class="container" id="form-container-for-pdf"> <!-- Añadimos un ID para capturar el contenido -->
+        <h1>Carta Descriptiva: Programa Formativo</h1>
+        <form id="cartaDescriptivaForm">
+
+            <div class="form-section">
+                <h2>Información General del Programa</h2>
+
+                <div class="form-group">
+                    <label for="nombreCurso">Nombre del curso o taller</label>
+                    <input type="text" id="nombreCurso" placeholder="Ej: Liderazgo Estratégico para Gerentes" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Modalidad</label>
+                    <div class="checkbox-group" id="modalidadGroup">
+                        <label><input type="checkbox" name="modalidad" value="Virtual"> Virtual</label>
+                        <label><input type="checkbox" name="modalidad" value="Presencial"> Presencial</label>
+                        <label><input type="checkbox" name="modalidad" value="Híbrido"> Híbrido</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Tipo de experiencia formativa</label>
+                    <div class="radio-group" id="tipoExperienciaGroup">
+                        <label><input type="radio" name="tipoExperiencia" value="Curso" required> Curso</label>
+                        <label><input type="radio" name="tipoExperiencia" value="Taller"> Taller</label>
+                        <label><input type="radio" name="tipoExperiencia" value="Programa Formativo"> Programa Formativo</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="dirigidoA">Dirigido a <span class="hint">(Perfil general de los participantes)</span></label>
+                    <textarea id="dirigidoA" placeholder="Ej: Gerentes, coordinadores y supervisores con interés en desarrollar habilidades de liderazgo y gestión de equipos."></textarea>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2>Contexto y Justificación</h2>
+
+                <div class="form-group">
+                    <label for="areaImpacto">Área o ámbito de aplicación <span class="hint">(¿En qué parte del funcionamiento de la organización impacta este curso?)</span></label>
+                    <textarea id="areaImpacto" placeholder="Describa el impacto esperado, ej: Mejora en la eficiencia operativa de los equipos de proyecto, reducción del turnover de personal en áreas clave, etc."></textarea>
+                    <span class="hint">Esta información se obtiene del DNF en sus apartados: Situación actual / problemática identificada, Objetivo organizacional esperado, Perfil de los participantes.</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="justificacion">Justificación <span class="hint">(Describa brevemente la necesidad organizacional que da origen al curso o taller.)</span></label>
+                    <textarea id="justificacion" placeholder="Ej: La empresa ha identificado una brecha en las habilidades de gestión de equipos lo que impacta la productividad. Este programa busca cerrar esa brecha..."></textarea>
+                    <span class="hint">Esta información se obtiene del DNF en sus apartados: Contexto general de la solicitud, Situación actual / problemática identificada.</span>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2>Objetivos y Estructura</h2>
+
+                <div class="form-group">
+                    <label for="objetivoGeneral">Objetivo general <span class="hint">(Desarrollar el propósito central del curso o taller, redactado en términos de capacidades, habilidades o desempeño esperado.)</span></label>
+                    <textarea id="objetivoGeneral" placeholder="Ej: Desarrollar en los participantes la capacidad de diseñar e implementar estrategias de liderazgo que fomenten la motivación y el alto rendimiento en sus equipos."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="estructuraGeneral">Estructura general del curso o taller</label>
+                    <textarea id="estructuraGeneral" placeholder="Ej: El curso se divide en 3 módulos principales: Fundamentos del Liderazgo, Herramientas de Gestión de Equipos y Aplicación Práctica de Estrategias. Cada módulo incluye actividades teóricas y prácticas."></textarea>
+                </div>
+            </div>
+
+            <div class="form-section table-section">
+                <h2>Estructura Detallada del Curso/Taller</h2>
+                <span class="hint">Presente la estructura del curso o taller por fases, momentos o bloques formativos, detallando los contenidos específicos.</span>
+
+                <div class="table-controls">
+                    <button type="button" class="add-row-btn" id="addRowBtn">Añadir Sesión</button>
+                </div>
+
+                <table id="sesionesTable">
+                    <thead>
+                        <tr>
+                            <th>Sesión #</th>
+                            <th>Tema</th>
+                            <th>Objetivos Específicos</th>
+                            <th>Estrategia Didáctica</th>
+                            <th>Recursos y Materiales</th>
+                            <th>Duración</th>
+                            <th>Desarrollo / Evaluación</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-label="Sesión #"><input type="number" value="1" min="1" class="session-num" readonly></td>
+                            <td data-label="Tema"><input type="text" placeholder="Introducción al Liderazgo"></td>
+                            <td data-label="Objetivos Específicos"><textarea placeholder="Identificar el contexto organizacional"></textarea></td>
+                            <td data-label="Estrategia Didáctica"><textarea placeholder="Actividades de reflexión guiada con discusión inicial de la situación de la empresa."></textarea></td>
+                            <td data-label="Recursos y Materiales"><input type="text" placeholder="Presentación digital"></td>
+                            <td data-label="Duración"><input type="text" placeholder="1 hora"></td>
+                            <td data-label="Desarrollo / Evaluación"><textarea placeholder="Tomar en cuenta la participación activa de los participantes."></textarea></td>
+                            <td data-label="Acciones"><button type="button" class="delete-row-btn">Eliminar</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="form-section">
+                <h2>Evaluación y Evidencias</h2>
+
+                <div class="form-group">
+                    <label for="estrategiaEvaluacion">Estrategia de evaluación final <span class="hint">(Si aplica. Describa cómo se valorará el aprendizaje o desempeño de los participantes - diagnóstica, formativa y/o sumativa.)</span></label>
+                    <textarea id="estrategiaEvaluacion" placeholder="Ej: La evaluación será formativa a través de la participación en debates y actividades prácticas, y sumativa mediante un proyecto final de aplicación."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="evidenciasAprendizaje">Evidencias de aprendizaje <span class="hint">(Mencione las evidencias generales que permitirán identificar el logro de los objetivos planteados. Por ejemplo: prácticas.)</span></label>
+                    <textarea id="evidenciasAprendizaje" placeholder="Ej: Presentación de un plan de acción de liderazgo, resolución de casos prácticos, participación activa en dinámicas de grupo, etc."></textarea>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button type="submit" class="submit-btn">Guardar Carta Descriptiva</button>
+                <button type="reset" class="reset-btn">Limpiar Formulario</button>
+                <button type="button" class="pdf-btn" id="generatePdfBtn">Generar PDF</button> <!-- Nuevo botón -->
+            </div>
+
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const addRowBtn = document.getElementById('addRowBtn');
+            const sesionesTableBody = document.querySelector('#sesionesTable tbody');
+            const generatePdfBtn = document.getElementById('generatePdfBtn'); // Referencia al nuevo botón
+
+            let sessionCounter = sesionesTableBody.children.length;
+
+            function renumberSessions() {
+                const rows = sesionesTableBody.querySelectorAll('tr');
+                rows.forEach((row, index) => {
+                    row.querySelector('.session-num').value = index + 1;
+                });
+            }
+
+            addRowBtn.addEventListener('click', function() {
+                sessionCounter++;
+                const newRow = document.createElement('tr');
+                newRow.innerHTML = `
+                    <td data-label="Sesión #"><input type="number" value="${sessionCounter}" min="1" class="session-num" readonly></td>
+                    <td data-label="Tema"><input type="text" placeholder="Colocar el nombre del tema"></td>
+                    <td data-label="Objetivos Específicos"><textarea placeholder="Colocar el objetivo específico"></textarea></td>
+                    <td data-label="Estrategia Didáctica"><textarea placeholder="Colocar la estrategia o actividades por realizar"></textarea></td>
+                    <td data-label="Recursos y Materiales"><input type="text" placeholder="¿Qué tipo de materiales se ocuparán?"></td>
+                    <td data-label="Duración"><input type="text" placeholder="Sesiones o tiempo"></td>
+                    <td data-label="Desarrollo / Evaluación"><textarea placeholder="¿Hay algún elemento evaluable?"></textarea></td>
+                    <td data-label="Acciones"><button type="button" class="delete-row-btn">Eliminar</button></td>
+                `;
+                sesionesTableBody.appendChild(newRow);
+                renumberSessions();
+            });
+
+            sesionesTableBody.addEventListener('click', function(event) {
+                if (event.target.classList.contains('delete-row-btn')) {
+                    event.target.closest('tr').remove();
+                    sessionCounter--;
+                    renumberSessions();
+                }
+            });
+
+            document.getElementById('cartaDescriptivaForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+                alert('Formulario enviado (¡Revisa la consola para ver los datos!)');
+                console.log('Formulario enviado:', Object.fromEntries(new FormData(event.target)));
+
+                const tableData = [];
+                sesionesTableBody.querySelectorAll('tr').forEach(row => {
+                    const rowData = {
+                        sesion: row.querySelector('.session-num').value,
+                        tema: row.children[1].querySelector('input').value,
+                        objetivos: row.children[2].querySelector('textarea').value,
+                        estrategia: row.children[3].querySelector('textarea').value,
+                        recursos: row.children[4].querySelector('input').value,
+                        duracion: row.children[5].querySelector('input').value,
+                        desarrollo: row.children[6].querySelector('textarea').value,
+                    };
+                    tableData.push(rowData);
+                });
+                console.log('Datos de la tabla de Sesiones:', tableData);
+            });
+
+            // Función para generar el PDF
+            generatePdfBtn.addEventListener('click', async function() {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF('p', 'mm', 'a4'); // 'p' (portrait), 'mm' (unidades), 'a4' (tamaño)
+
+                doc.setFont("helvetica"); // Establecer una fuente predeterminada
+                doc.setFontSize(12);
+
+                const margin = 15;
+                let y = margin; // Posición Y inicial
+
+                // Título del documento
+                doc.setFontSize(18);
+                doc.setTextColor(0, 141, 145); // Primary color
+                doc.text("Carta Descriptiva: Programa Formativo", 105, y, null, null, "center");
+                y += 10;
+                doc.line(margin, y, 210 - margin, y); // Línea debajo del título
+                y += 10;
+
+                doc.setFontSize(12);
+                doc.setTextColor(52, 58, 64); // Text color
+
+                // 1. Información General del Programa
+                doc.setFontSize(14);
+                doc.setTextColor(0, 141, 145);
+                doc.text("1. Información General del Programa", margin, y);
+                doc.line(margin, y + 2, 210 - margin, y + 2); // Línea debajo de la sección
+                y += 10;
+                doc.setFontSize(12);
+                doc.setTextColor(52, 58, 64);
+
+                const nombreCurso = document.getElementById('nombreCurso').value;
+                doc.text(`Nombre del curso o taller: ${nombreCurso || 'No especificado'}`, margin, y);
+                y += 7;
+
+                const modalidadChecked = Array.from(document.querySelectorAll('#modalidadGroup input[type="checkbox"]:checked')).map(cb => cb.value).join(', ');
+                doc.text(`Modalidad: ${modalidadChecked || 'No especificado'}`, margin, y);
+                y += 7;
+
+                const tipoExperienciaChecked = document.querySelector('#tipoExperienciaGroup input[type="radio"]:checked')?.value;
+                doc.text(`Tipo de experiencia formativa: ${tipoExperienciaChecked || 'No especificado'}`, margin, y);
+                y += 7;
+
+                const dirigidoA = document.getElementById('dirigidoA').value;
+                doc.text(`Dirigido a:`, margin, y);
+                y += 5;
+                doc.text(doc.splitTextToSize(dirigidoA || 'No especificado', 210 - 2 * margin), margin, y);
+                y += doc.splitTextToSize(dirigidoA || 'No especificado', 210 - 2 * margin).length * 5 + 10;
+
+
+                // 2. Contexto y Justificación
+                if (y > 270) { doc.addPage(); y = margin; } // Salto de página si es necesario
+                doc.setFontSize(14);
+                doc.setTextColor(0, 141, 145);
+                doc.text("2. Contexto y Justificación", margin, y);
+                doc.line(margin, y + 2, 210 - margin, y + 2);
+                y += 10;
+                doc.setFontSize(12);
+                doc.setTextColor(52, 58, 64);
+
+                const areaImpacto = document.getElementById('areaImpacto').value;
+                doc.text(`Área o ámbito de aplicación:`, margin, y);
+                y += 5;
+                doc.text(doc.splitTextToSize(areaImpacto || 'No especificado', 210 - 2 * margin), margin, y);
+                y += doc.splitTextToSize(areaImpacto || 'No especificado', 210 - 2 * margin).length * 5 + 7;
+
+                const justificacion = document.getElementById('justificacion').value;
+                doc.text(`Justificación:`, margin, y);
+                y += 5;
+                doc.text(doc.splitTextToSize(justificacion || 'No especificado', 210 - 2 * margin), margin, y);
+                y += doc.splitTextToSize(justificacion || 'No especificado', 210 - 2 * margin).length * 5 + 10;
+
+
+                // 3. Objetivos y Estructura
+                if (y > 270) { doc.addPage(); y = margin; }
+                doc.setFontSize(14);
+                doc.setTextColor(0, 141, 145);
+                doc.text("3. Objetivos y Estructura", margin, y);
+                doc.line(margin, y + 2, 210 - margin, y + 2);
+                y += 10;
+                doc.setFontSize(12);
+                doc.setTextColor(52, 58, 64);
+
+                const objetivoGeneral = document.getElementById('objetivoGeneral').value;
+                doc.text(`Objetivo general:`, margin, y);
+                y += 5;
+                doc.text(doc.splitTextToSize(objetivoGeneral || 'No especificado', 210 - 2 * margin), margin, y);
+                y += doc.splitTextToSize(objetivoGeneral || 'No especificado', 210 - 2 * margin).length * 5 + 7;
+
+                const estructuraGeneral = document.getElementById('estructuraGeneral').value;
+                doc.text(`Estructura general del curso o taller:`, margin, y);
+                y += 5;
+                doc.text(doc.splitTextToSize(estructuraGeneral || 'No especificado', 210 - 2 * margin), margin, y);
+                y += doc.splitTextToSize(estructuraGeneral || 'No especificado', 210 - 2 * margin).length * 5 + 10;
+
+
+                // 4. Estructura Detallada del Curso/Taller (como imagen)
+                if (y > 240) { doc.addPage(); y = margin; } // Salto de página antes de la tabla grande
+                doc.setFontSize(14);
+                doc.setTextColor(0, 141, 145);
+                doc.text("4. Estructura Detallada del Curso/Taller", margin, y);
+                doc.line(margin, y + 2, 210 - margin, y + 2);
+                y += 10;
+                doc.setFontSize(12);
+                doc.setTextColor(52, 58, 64);
+
+                // Convertir la tabla a imagen y añadirla al PDF
+                const tableElement = document.getElementById('sesionesTable');
+                if (tableElement) {
+                    // Temporalmente ocultar la columna "Acciones" para la imagen del PDF
+                    const actionCells = tableElement.querySelectorAll('th:last-child, td:last-child');
+                    actionCells.forEach(cell => cell.style.display = 'none');
+
+                    await html2canvas(tableElement, { scale: 2, logging: false }).then(canvas => {
+                        const imgData = canvas.toDataURL('image/png');
+                        const imgWidth = 180; // Ancho de la imagen en el PDF
+                        const imgHeight = canvas.height * imgWidth / canvas.width;
+
+                        // Verificar si hay espacio para la tabla, si no, añadir nueva página
+                        if (y + imgHeight > 280) {
+                            doc.addPage();
+                            y = margin;
+                        }
+
+                        doc.addImage(imgData, 'PNG', margin, y, imgWidth, imgHeight);
+                        y += imgHeight + 10;
+                    }).finally(() => {
+                        // Restaurar la visibilidad de la columna "Acciones"
+                        actionCells.forEach(cell => cell.style.display = '');
+                    });
+                } else {
+                    doc.text('No hay estructura detallada del curso.', margin, y);
+                    y += 10;
+                }
+
+                // 5. Evaluación y Evidencias
+                if (y > 270) { doc.addPage(); y = margin; }
+                doc.setFontSize(14);
+                doc.setTextColor(0, 141, 145);
+                doc.text("5. Evaluación y Evidencias", margin, y);
+                doc.line(margin, y + 2, 210 - margin, y + 2);
+                y += 10;
+                doc.setFontSize(12);
+                doc.setTextColor(52, 58, 64);
+
+                const estrategiaEvaluacion = document.getElementById('estrategiaEvaluacion').value;
+                doc.text(`Estrategia de evaluación final:`, margin, y);
+                y += 5;
+                doc.text(doc.splitTextToSize(estrategiaEvaluacion || 'No especificado', 210 - 2 * margin), margin, y);
+                y += doc.splitTextToSize(estrategiaEvaluacion || 'No especificado', 210 - 2 * margin).length * 5 + 7;
+
+                const evidenciasAprendizaje = document.getElementById('evidenciasAprendizaje').value;
+                doc.text(`Evidencias de aprendizaje:`, margin, y);
+                y += 5;
+                doc.text(doc.splitTextToSize(evidenciasAprendizaje || 'No especificado', 210 - 2 * margin), margin, y);
+                y += doc.splitTextToSize(evidenciasAprendizaje || 'No especificado', 210 - 2 * margin).length * 5 + 10;
+
+
+                // Guardar el PDF
+                doc.save('CartaDescriptiva_ProgramaFormativo.pdf');
+            });
+        });
+    </script>
+</body>
+</html>
